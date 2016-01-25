@@ -1,12 +1,19 @@
 {
-    "name": "mics8128/php-slack-chatroom",
+    "name": "mics8128/PhpSlackChannel",
     "description": "this is can make multi chatrom on your website using slack channel.",
-    "license": "The MIT License",
+    "license": "MIT",
     "authors": [
         {
             "name": "Mics",
             "email": "mics.mm@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mics8128\\PhpSlackChannel\\": "src/"
+        }
+    }
 }
