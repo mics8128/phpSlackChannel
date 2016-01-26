@@ -8,8 +8,15 @@
             "email": "mics.mm@gmail.com"
         }
     ],
+   "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/Devristo/phpws"
+        }
+    ],
     "require": {
-        "php": ">=5.5"
+        "php": ">=5.5",
+        "devristo/phpws": "dev-master"
     },
     "autoload": {
         "psr-4": {

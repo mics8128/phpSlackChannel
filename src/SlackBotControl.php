@@ -50,12 +50,34 @@ class SlackBotControl
         var_dump($data);
         return $this->sendData("channels.history", $data);
     }
-    
-    public function getWebsocket(){
-        $data['token'] = $this->token;
-        return $this->sendData("rtm.start", $data)->url;
+    public function getUsersRaw(){
+        return $this->users;
     }
     
+    public function getUsers(){
+        //TODO fix run this have to run getWsUrl before.
+        $output_users = [];
+        foreach($this->users as $user){
+            if(!$user->deleted){
+                $output_users[$user->id] = [
+                    "name" => $user->name,
+                    "realname" => $user->profile->first_name . " " . $user->profile->last_name,
+                    "image" => $user->profile->image_48,
+                    "status" => $user->status,
+                ];
+            }
+        }
+        return $output_users;
+    }
+    
+    private function getWsUrl(){
+        $data['token'] = $this->token;
+        $data['simple_latest'] = "1";
+        $data['no_unreads'] = "1";
+        $response = $this->sendData("rtm.start", $data);
+        $this->users = $response->users;
+        return $response->url;
+    }
     
     /* Send data to API */
     private function sendData($method, $data = []){
